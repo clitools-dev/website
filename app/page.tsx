@@ -36,8 +36,8 @@ export default function HomePage() {
           </Link>
           <div className="hidden md:flex space-x-6 items-center">
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Home</Link>
-            <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Categories</Link>
-            <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
+            <Link className="transition duration-150 hover:text-gruvbox-green" href="/browse-tools" style={{ color: '#ebdbb2' }}>Categories</Link>
+            <Link className="transition duration-150 hover:text-gruvbox-green" href="/submit-tool" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>About Us</Link>
           </div>
           <div className="flex items-center space-x-4">
@@ -84,14 +84,14 @@ export default function HomePage() {
           </p>
           <div className="mt-8 space-x-4">
             <Link
-              href="#"
+              href="/browse-tools"
               className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-green-darker"
               style={{ backgroundColor: '#b8bb26', color: '#282828', borderColor: '#b8bb26' }}
             >
               ./browse_tools
             </Link>
             <Link
-              href="#"
+              href="/submit-tool"
               className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-yellow-transparent"
               style={{ backgroundColor: 'transparent', color: '#fabd2f', borderColor: '#fabd2f' }}
             >
@@ -253,109 +253,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16" style={{ backgroundColor: '#32302f' }}>
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: '#ebdbb2' }}>
-            <span style={{ color: '#fabd2f' }}>&gt;$</span> Browse by Category
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {/* Category Card 1 */}
-            <div
-              className="border-2 p-6 rounded-none text-center transition-colors duration-300 hover:border-gruvbox-orange"
-              style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-            >
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                className="w-16 h-16 mx-auto mb-4 border-2"
-                style={{ borderColor: '#665c54' }}
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="64" height="64" style={{ fill: '#3c3836' }} />
-                <rect x="10" y="12" width="44" height="32" rx="2" style={{ stroke: '#8ec07c' }} strokeWidth="3" />
-                <path d="M10 20 H54" style={{ stroke: '#8ec07c' }} strokeWidth="2" />
-                <rect x="24" y="8" width="16" height="6" rx="1" style={{ fill: '#8ec07c' }} />
-              </svg>
-              <h3 className="text-xl font-semibold" style={{ color: '#ebdbb2' }}>
-                cd Development
-              </h3>
-            </div>
-            {/* Category Card 2 */}
-            <div
-              className="border-2 p-6 rounded-none text-center transition-colors duration-300 hover:border-gruvbox-orange"
-              style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-            >
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                className="w-16 h-16 mx-auto mb-4 border-2"
-                style={{ borderColor: '#665c54' }}
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="64" height="64" style={{ fill: '#3c3836' }} />
-                <rect x="10" y="12" width="44" height="32" rx="2" style={{ stroke: '#8ec07c' }} strokeWidth="3" />
-                <path d="M10 20 H54" style={{ stroke: '#8ec07c' }} strokeWidth="2" />
-                <rect x="24" y="8" width="16" height="6" rx="1" style={{ fill: '#8ec07c' }} />
-              </svg>
-              <h3 className="text-xl font-semibold" style={{ color: '#ebdbb2' }}>
-                cd System_Admin
-              </h3>
-            </div>
-            {/* Category Card 3 */}
-            <div
-              className="border-2 p-6 rounded-none text-center transition-colors duration-300 hover:border-gruvbox-orange"
-              style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-            >
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                className="w-16 h-16 mx-auto mb-4 border-2"
-                style={{ borderColor: '#665c54' }}
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="64" height="64" style={{ fill: '#3c3836' }} />
-                <rect x="10" y="12" width="44" height="32" rx="2" style={{ stroke: '#8ec07c' }} strokeWidth="3" />
-                <path d="M10 20 H54" style={{ stroke: '#8ec07c' }} strokeWidth="2" />
-                <rect x="24" y="8" width="16" height="6" rx="1" style={{ fill: '#8ec07c' }} />
-              </svg>
-              <h3 className="text-xl font-semibold" style={{ color: '#ebdbb2' }}>
-                cd Networking
-              </h3>
-            </div>
-            {/* Category Card 4 */}
-            <div
-              className="border-2 p-6 rounded-none text-center transition-colors duration-300 hover:border-gruvbox-orange"
-              style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-            >
-              <svg
-                width="64"
-                height="64"
-                viewBox="0 0 64 64"
-                className="w-16 h-16 mx-auto mb-4 border-2"
-                style={{ borderColor: '#665c54' }}
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="64" height="64" style={{ fill: '#3c3836' }} />
-                <rect x="10" y="12" width="44" height="32" rx="2" style={{ stroke: '#8ec07c' }} strokeWidth="3" />
-                <path d="M10 20 H54" style={{ stroke: '#8ec07c' }} strokeWidth="2" />
-                <rect x="24" y="8" width="16" height="6" rx="1" style={{ fill: '#8ec07c' }} />
-              </svg>
-              <h3 className="text-xl font-semibold" style={{ color: '#ebdbb2' }}>
-                cd Utilities
-              </h3>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Call to Action / Discord */}
       <section
         className="border-t-2 border-b-2 border-dashed py-12"
@@ -369,7 +266,7 @@ export default function HomePage() {
           <p className="mt-4 text-lg mb-8" style={{ color: '#928374' }}>
             // Join our community on Discord to share your thoughts and help us grow!
           </p>
-          <a // Changed from Link to a for external URL
+          <a
             href="https://discord.com/channels/1372408959809486870/1372408959809486873"
             target="_blank"
             rel="noopener noreferrer"
