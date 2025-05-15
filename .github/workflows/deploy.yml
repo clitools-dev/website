@@ -27,7 +27,13 @@ jobs:
 
       - name: Build Next.js App
         run: npm run build # This generates static files to the out directory
-
+        env:
+          # Pass Auth0 environment variables from GitHub Secrets to the build process
+          NEXT_PUBLIC_AUTH0_DOMAIN: ${{ secrets.NEXT_PUBLIC_AUTH0_DOMAIN }}
+          NEXT_PUBLIC_AUTH0_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID }}
+          # For production, the callback URL is your custom domain
+          NEXT_PUBLIC_AUTH0_CALLBACK_URL: 'https://clitools.dev'
+          # NEXT_PUBLIC_AUTH0_AUDIENCE: ${{ secrets.NEXT_PUBLIC_AUTH0_AUDIENCE }}
       - name: Deploy to main branch
         uses: peaceiris/actions-gh-pages@v4
         with:

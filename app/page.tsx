@@ -1,7 +1,31 @@
+"use client"; // Mark this component as a Client Component
+
 import Image from 'next/image'; // Potentially for future use, not strictly needed for direct SVG embedding
 import Link from 'next/link';   // For Next.js optimised navigation if routes are internal
+import { useAuth0 } from '@auth0/auth0-react'; // Import useAuth0
+import { useEffect } from 'react'; // Import useEffect for logging
 
 export default function HomePage() {
+  const { user, isAuthenticated, isLoading, loginWithRedirect, logout, error } = useAuth0(); // Get user state and auth methods
+
+  useEffect(() => {
+    console.log("Auth0 State:", {
+      isLoading,
+      isAuthenticated,
+      user,
+      error,
+    });
+  }, [isLoading, isAuthenticated, user, error]);
+
+  if (isLoading) {
+    console.log("Auth0 is loading...");
+    // Optionally render a loading indicator here for the auth part
+  }
+  if (error) {
+    console.error("Auth0 Error:", error);
+    // Optionally render an error message here
+  }
+
   return (
     <>
       {/* Navbar */}
@@ -16,13 +40,35 @@ export default function HomePage() {
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>About Us</Link>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             <input
               className="border rounded-none px-3 py-1 placeholder-gruvbox focus:outline-none focus:ring-0"
               style={{ backgroundColor: '#3c3836', color: '#ebdbb2', borderColor: '#fe8019' }}
               type="text"
               placeholder="Search_tools>"
             />
+            {!isLoading && !isAuthenticated && (
+              <button 
+                onClick={() => loginWithRedirect()}
+                className="transition duration-150 hover:text-gruvbox-green whitespace-nowrap"
+                style={{ color: '#ebdbb2', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily:'inherit', fontSize: 'inherit' }}
+              >
+                Login
+              </button>
+            )}
+            {!isLoading && isAuthenticated && user && (
+              <div className="flex items-center space-x-2">
+                {user.picture && <Image src={user.picture} alt={user.name || 'User avatar'} width={32} height={32} className="rounded-full" />}
+                {user.name && <span style={{color: '#ebdbb2'}} className="whitespace-nowrap">{user.name}</span>}
+                <button 
+                  onClick={() => logout({ logoutParams: { returnTo: typeof window !== 'undefined' ? window.location.origin : undefined } })}
+                  className="transition duration-150 hover:text-gruvbox-green whitespace-nowrap"
+                  style={{ color: '#ebdbb2', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily:'inherit', fontSize: 'inherit' }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </nav>
