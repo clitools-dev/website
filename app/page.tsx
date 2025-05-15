@@ -38,7 +38,7 @@ export default function HomePage() {
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Home</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/browse-tools" style={{ color: '#ebdbb2' }}>Categories</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/submit-tool" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
-            <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>About Us</Link>
+            <Link className="transition duration-150 hover:text-gruvbox-green" href="/about" style={{ color: '#ebdbb2' }}>About Us</Link>
           </div>
           <div className="flex items-center space-x-4">
             <input
