@@ -1,0 +1,44 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] # You can adjust Node.js versions as needed
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm' # Or 'yarn', 'pnpm', depending on your package manager
+
+    - name: Install dependencies
+      run: npm install # Or yarn install, pnpm install
+
+    - name: Build project
+      run: npm run build # Or yarn build, pnpm build
+      env:
+        CI: true
+
+    # Add steps here if you want to deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main' # Only deploy on push to main branch
+      uses: peaceiris/actions-gh-pages@v4 # Use v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./out # Next.js static export directory, as we configured output: 'export'
+        # user_name: 'github-actions[bot]' # Optional: Custom committer name
+        # user_email: 'github-actions[bot]@users.noreply.github.com' # Optional: Custom committer email
+        # cname: your.custom.domain.com # Optional: If you use a custom domain 

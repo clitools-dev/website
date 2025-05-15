@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Gruvbox color definitions from index.html */
+.gruvbox-fg { color: #ebdbb2; }
+.gruvbox-fg-dim { color: #bdae93; }
+.gruvbox-green { color: #b8bb26; }
+.gruvbox-yellow { color: #fabd2f; }
+.gruvbox-aqua { color: #8ec07c; }
+.gruvbox-orange { color: #fe8019; }
+.gruvbox-gray { color: #928374; }
+
+.hover\:text-gruvbox-green:hover { color: #b8bb26 !important; } /* Added !important for specificity if needed */
+.hover\:text-gruvbox-yellow:hover { color: #fabd2f !important; }
+.hover\:border-gruvbox-orange:hover { border-color: #fe8019 !important; }
+.hover\:bg-gruvbox-green-darker:hover { background-color: #98971a !important; } /* Faded Green for hover */
+.hover\:bg-gruvbox-yellow-darker:hover { background-color: #d79921 !important; } /* Faded Yellow for hover */
+.hover\:bg-gruvbox-aqua-darker:hover { background-color: #689d6a !important; } /* Faded Aqua for hover */
+.hover\:bg-gruvbox-yellow-transparent:hover { background-color: rgba(250, 189, 47, 0.1) !important; }
+
+.placeholder-gruvbox::-webkit-input-placeholder { color: #928374; }
+.placeholder-gruvbox:-moz-placeholder { color: #928374; opacity: 1; }
+.placeholder-gruvbox::-moz-placeholder { color: #928374; opacity: 1; }
+.placeholder-gruvbox:-ms-input-placeholder { color: #928374; }
+.placeholder-gruvbox::-ms-input-placeholder { color: #928374; }
+.placeholder-gruvbox::placeholder { color: #928374; }
+
+/* Base body styles from index.html */
+body {
+  background-color: #282828; /* style="background-color: #282828;" */
+  color: #ebdbb2; /* style="color: #ebdbb2;" */
+  /* font-mono antialiased are applied in layout.tsx via className */
+} 

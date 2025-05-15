@@ -1,0 +1,41 @@
+name: Deploy Next.js Site to Main
+
+on:
+  push:
+    branches:
+      - source # Branch that triggers the workflow
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needs permission to push to the main branch
+
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: source
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Using a newer Node.js LTS version
+
+      - name: Install Dependencies
+        run: npm ci # Using npm ci for reproducible builds
+
+      - name: Build Next.js App
+        run: npm run build # This generates static files to the out directory
+
+      - name: Deploy to main branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out # Next.js static export directory
+          publish_branch: main # Branch to publish to
+          force_orphan: true # Create a clean branch without history
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy static site to main from source branch'
+          cname: 'clitools.dev' # Add custom domain here 
