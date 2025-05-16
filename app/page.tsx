@@ -21,6 +21,7 @@ const SearchBar = dynamic(() => import('./components/SearchBar'), {
 export default function HomePage() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout, error } = useAuth0(); // Get user state and auth methods
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Add mobile menu state
 
   useEffect(() => {
     console.log("Auth0 State:", {
@@ -47,7 +48,7 @@ export default function HomePage() {
     };
   }, []);
 
-  // 使用 Intersection Observer 实现懒加载
+  // Implement lazy loading using Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -79,24 +80,61 @@ export default function HomePage() {
     <>
       {/* Navbar */}
       <nav className="sticky top-0 z-50 border-b-2" style={{ backgroundColor: '#1d2021', borderColor: '#fe8019' }}>
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-          <Link className="font-bold text-2xl transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>
+        <div className="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+          <Link className="font-bold text-xl md:text-2xl transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>
             CliTools.Dev
           </Link>
+          
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              style={{ color: '#ebdbb2' }}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6 items-center">
             <Link className="transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Home</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/browse-tools" style={{ color: '#ebdbb2' }}>Categories</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/submit-tool" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/about" style={{ color: '#ebdbb2' }}>About Us</Link>
           </div>
+
+          {/* Mobile Navigation */}
+          <div className={`md:hidden absolute top-full left-0 right-0 bg-[#1d2021] border-b-2 border-[#fe8019] transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+            <div className="container mx-auto px-4 py-3 space-y-3">
+              <Link className="block py-2 transition duration-150 hover:text-gruvbox-green" href="#" style={{ color: '#ebdbb2' }}>Home</Link>
+              <Link className="block py-2 transition duration-150 hover:text-gruvbox-green" href="/browse-tools" style={{ color: '#ebdbb2' }}>Categories</Link>
+              <Link className="block py-2 transition duration-150 hover:text-gruvbox-green" href="/submit-tool" style={{ color: '#ebdbb2' }}>Submit a Tool</Link>
+              <Link className="block py-2 transition duration-150 hover:text-gruvbox-green" href="/about" style={{ color: '#ebdbb2' }}>About Us</Link>
+            </div>
+          </div>
+
           <div className="flex items-center space-x-4">
-            <Suspense fallback={<div className="w-48 h-8 bg-gray-200 animate-pulse" />}>
+            <Suspense fallback={<div className="w-32 md:w-48 h-8 bg-gray-200 animate-pulse" />}>
               <SearchBar />
             </Suspense>
             {!isLoading && !isAuthenticated && (
               <button 
                 onClick={() => loginWithRedirect()}
-                className="transition duration-150 hover:text-gruvbox-green whitespace-nowrap"
+                className="transition duration-150 hover:text-gruvbox-green whitespace-nowrap text-sm md:text-base"
                 style={{ color: '#ebdbb2', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily:'inherit', fontSize: 'inherit' }}
               >
                 Login
@@ -112,18 +150,18 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section with lazy loading */}
-      <header className="py-16 lazy-load opacity-0" style={{ backgroundColor: '#32302f', color: '#ebdbb2' }}>
-        <div className="container mx-auto px-6 py-12 text-center">
-          <h1 className="text-5xl font-bold mb-4 animate-pulse" style={{ color: '#ebdbb2' }}>
+      <header className="py-8 md:py-16 lazy-load opacity-0" style={{ backgroundColor: '#32302f', color: '#ebdbb2' }}>
+        <div className="container mx-auto px-4 md:px-6 py-8 md:py-12 text-center">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-pulse" style={{ color: '#ebdbb2' }}>
             Discover the Best Command-Line Tools
           </h1>
-          <p className="mt-4 text-lg" style={{ color: '#d5c4a1' }}>
+          <p className="mt-4 text-base md:text-lg" style={{ color: '#d5c4a1' }}>
             A curated collection of modern CLI tools for developers.
           </p>
-          <div className="mt-8 space-x-4">
+          <div className="mt-8 flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
             <Link
               href="/browse-tools"
-              className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-green-darker"
+              className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-green-darker text-center"
               style={{ backgroundColor: '#b8bb26', color: '#282828', borderColor: '#b8bb26' }}
               aria-label="Browse CLI tools"
             >
@@ -131,7 +169,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/submit-tool"
-              className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-yellow-transparent"
+              className="font-semibold px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-yellow-transparent text-center"
               style={{ backgroundColor: 'transparent', color: '#fabd2f', borderColor: '#fabd2f' }}
               aria-label="Submit a new CLI tool"
             >
@@ -199,26 +237,26 @@ export default function HomePage() {
         />
 
         {/* GitHub Organization Invitation Section with lazy loading */}
-        <section className="container mx-auto px-6 py-16 lazy-load opacity-0" aria-labelledby="github-invitation-heading">
+        <section className="container mx-auto px-4 md:px-6 py-8 md:py-16 lazy-load opacity-0" aria-labelledby="github-invitation-heading">
           <div className="text-center">
-            <h2 id="github-invitation-heading" className="text-3xl font-bold mb-10" style={{ color: '#ebdbb2' }}>
+            <h2 id="github-invitation-heading" className="text-2xl md:text-3xl font-bold mb-6 md:mb-10" style={{ color: '#ebdbb2' }}>
               <span style={{ color: '#b8bb26' }}>user@clitools</span>:
               <span style={{ color: '#83a598' }}>~</span>$ Want to join our GitHub organization?
             </h2>
-            <div className="mt-4 mb-8 p-4 rounded-lg inline-block" style={{ backgroundColor: '#3c3836', border: '2px solid #fe8019' }}>
-              <p className="text-lg" style={{ color: '#fe8019' }}>
+            <div className="mt-4 mb-6 md:mb-8 p-4 rounded-lg inline-block" style={{ backgroundColor: '#3c3836', border: '2px solid #fe8019' }}>
+              <p className="text-base md:text-lg" style={{ color: '#fe8019' }}>
                 🚧 <strong>Project Status:</strong> We are currently building our organization and automation infrastructure.
                 This is the perfect time to join and help shape the future of CliTools.Dev!
               </p>
             </div>
-            <p className="mt-4 text-lg mb-8" style={{ color: '#928374' }}>
+            <p className="mt-4 text-base md:text-lg mb-6 md:mb-8" style={{ color: '#928374' }}>
               // Submit an issue to request joining our organization, let's build the best CLI tools directory together!
             </p>
             <a
               href="https://github.com/clitools-dev/members/issues/new?title=Request%20to%20join%20organization&body=%F0%9F%91%8B%20Hey%20there%21%0A%0A%F0%9F%9A%80%20I%20would%20love%20to%20join%20the%20clitools-dev%20organization%20and%20contribute%20to%20building%20the%20best%20CLI%20tools%20directory%21%0A%0A%23%23%20%F0%9F%93%9D%20About%20me%0A%0A-%20%F0%9F%91%A5%20GitHub%20username%3A%20%0A-%20%F0%9F%92%AC%20Why%20I%20want%20to%20join%3A%20%0A-%20%F0%9F%92%BB%20What%20I%20can%20contribute%3A%20%0A%0A%23%23%20%F0%9F%93%9A%20Additional%20information%0A%0A%3C!--%20Feel%20free%20to%20add%20any%20other%20relevant%20information%20here%20--%3E%0A%0A%F0%9F%8C%9F%20Looking%20forward%20to%20joining%20the%20community%21&labels=join-request"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold px-8 py-3 rounded-none border-2 transition duration-150 inline-flex items-center hover:bg-gruvbox-yellow-darker"
+              className="font-semibold px-6 md:px-8 py-3 rounded-none border-2 transition duration-150 inline-flex items-center justify-center hover:bg-gruvbox-yellow-darker w-full md:w-auto"
               style={{ backgroundColor: '#fabd2f', color: '#282828', borderColor: '#fabd2f' }}
               aria-label="Request to join GitHub organization"
             >
@@ -238,23 +276,23 @@ export default function HomePage() {
 
         {/* Call to Action / Discord */}
         <section
-          className="border-t-2 border-b-2 border-dashed py-12 lazy-load opacity-0"
+          className="border-t-2 border-b-2 border-dashed py-8 md:py-12 lazy-load opacity-0"
           style={{ backgroundColor: '#3c3836', borderColor: '#fe8019' }}
           aria-labelledby="discord-cta-heading"
         >
-          <div className="container mx-auto px-6 py-10 text-center">
-            <h2 id="discord-cta-heading" className="text-3xl font-bold" style={{ color: '#ebdbb2' }}>
+          <div className="container mx-auto px-4 md:px-6 py-6 md:py-10 text-center">
+            <h2 id="discord-cta-heading" className="text-2xl md:text-3xl font-bold" style={{ color: '#ebdbb2' }}>
               <span style={{ color: '#b8bb26' }}>user@clitools</span>:
               <span style={{ color: '#83a598' }}>~</span>$ Have an Idea or Suggestion?
             </h2>
-            <p className="mt-4 text-lg mb-8" style={{ color: '#928374' }}>
+            <p className="mt-4 text-base md:text-lg mb-6 md:mb-8" style={{ color: '#928374' }}>
               // Join our community on Discord to share your thoughts and help us grow!
             </p>
             <a
               href="https://discord.com/channels/1372408959809486870/1372408959809486873"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold px-8 py-3 rounded-none border-2 transition duration-150 inline-flex items-center hover:bg-gruvbox-yellow-darker"
+              className="font-semibold px-6 md:px-8 py-3 rounded-none border-2 transition duration-150 inline-flex items-center justify-center hover:bg-gruvbox-yellow-darker w-full md:w-auto"
               style={{ backgroundColor: '#fabd2f', color: '#282828', borderColor: '#fabd2f' }}
               aria-label="Join our Discord community"
             >
@@ -274,22 +312,22 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t-2 py-8" style={{ backgroundColor: '#1d2021', color: '#a89984', borderColor: '#fe8019' }}>
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm">&copy; 2025 CLI Tools Dev. All rights reserved. Kernel version: Gruvbox-dark-0.1</p>
-          <div className="mt-4 space-x-4 text-xs">
+      <footer className="border-t-2 py-6 md:py-8" style={{ backgroundColor: '#1d2021', color: '#a89984', borderColor: '#fe8019' }}>
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <p className="text-xs md:text-sm">&copy; 2025 CLI Tools Dev. All rights reserved. Kernel version: Gruvbox-dark-0.1</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2 md:gap-4 text-xs">
             <Link href="#" className="transition duration-150 hover:text-gruvbox-green" style={{ color: '#ebdbb2' }}>
               README.md
-            </Link>{' '}
-            <span style={{ color: '#665c54' }}>|</span>{' '}
+            </Link>
+            <span style={{ color: '#665c54' }}>|</span>
             <Link href="#" className="transition duration-150 hover:text-gruvbox-green" style={{ color: '#ebdbb2' }}>
               CONTRIBUTING.md
-            </Link>{' '}
-            <span style={{ color: '#665c54' }}>|</span>{' '}
+            </Link>
+            <span style={{ color: '#665c54' }}>|</span>
             <Link href="#" className="transition duration-150 hover:text-gruvbox-green" style={{ color: '#ebdbb2' }}>
               LICENSE
-            </Link>{' '}
-            <span style={{ color: '#665c54' }}>|</span>{' '}
+            </Link>
+            <span style={{ color: '#665c54' }}>|</span>
             <Link href="#" className="transition duration-150 hover:text-gruvbox-green" style={{ color: '#ebdbb2' }}>
               status --extended
             </Link>
