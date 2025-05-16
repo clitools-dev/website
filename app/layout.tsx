@@ -120,6 +120,24 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* 预加载关键资源 */}
+        <link
+          rel="preload"
+          href="/fonts/Inter-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/Inter-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {/* 预连接关键域名 */}
+        <link rel="preconnect" href="https://clitools.dev" />
+        <link rel="dns-prefetch" href="https://clitools.dev" />
       </head>
       <body className={`${inter.className} font-sans antialiased`}>
         <AuthProvider> {/* Use the new AuthProvider component here */}

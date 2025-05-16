@@ -1,9 +1,22 @@
 "use client"; // Mark this component as a Client Component
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image'; // Potentially for future use, not strictly needed for direct SVG embedding
 import Link from 'next/link';   // For Next.js optimised navigation if routes are internal
 import { useAuth0 } from '@auth0/auth0-react'; // Import useAuth0
-import { useEffect, useState } from 'react'; // Import useEffect for logging and useState for dropdown
+import { useEffect, useState, Suspense } from 'react'; // Import useEffect for logging and useState for dropdown
+
+// Dynamically import non-critical components
+const UserDropdown = dynamic(() => import('./components/UserDropdown'), {
+  loading: () => <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />,
+  ssr: false
+});
+
+// Dynamically import search component
+const SearchBar = dynamic(() => import('./components/SearchBar'), {
+  loading: () => <div className="w-48 h-8 bg-gray-200 animate-pulse" />,
+  ssr: false
+});
 
 export default function HomePage() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout, error } = useAuth0(); // Get user state and auth methods
@@ -34,6 +47,25 @@ export default function HomePage() {
     };
   }, []);
 
+  // 使用 Intersection Observer 实现懒加载
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.lazy-load').forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   if (isLoading) {
     console.log("Auth0 is loading...");
     // Optionally render a loading indicator here for the auth part
@@ -58,12 +90,9 @@ export default function HomePage() {
             <Link className="transition duration-150 hover:text-gruvbox-green" href="/about" style={{ color: '#ebdbb2' }}>About Us</Link>
           </div>
           <div className="flex items-center space-x-4">
-            <input
-              className="border rounded-none px-3 py-1 placeholder-gruvbox focus:outline-none focus:ring-0"
-              style={{ backgroundColor: '#3c3836', color: '#ebdbb2', borderColor: '#fe8019' }}
-              type="text"
-              placeholder="Search_tools>"
-            />
+            <Suspense fallback={<div className="w-48 h-8 bg-gray-200 animate-pulse" />}>
+              <SearchBar />
+            </Suspense>
             {!isLoading && !isAuthenticated && (
               <button 
                 onClick={() => loginWithRedirect()}
@@ -74,38 +103,16 @@ export default function HomePage() {
               </button>
             )}
             {!isLoading && isAuthenticated && user && (
-              <div className="relative">
-                <div 
-                  id="user-dropdown-trigger"
-                  className="flex items-center space-x-2 cursor-pointer" 
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
-                  {user.picture && <Image src={user.picture} alt={user.name || 'User avatar'} width={32} height={32} className="rounded-full" />}
-                  {user.name && <span style={{color: '#ebdbb2'}} className="whitespace-nowrap">{user.name}</span>}
-                </div>
-                {isDropdownOpen && (
-                  <div 
-                    id="user-dropdown"
-                    className="absolute right-0 mt-2 w-48 rounded-none border-2" 
-                    style={{ backgroundColor: '#3c3836', borderColor: '#fe8019' }}
-                  >
-                    <button 
-                      onClick={() => logout({ logoutParams: { returnTo: typeof window !== 'undefined' ? window.location.origin : undefined } })}
-                      className="w-full text-left px-4 py-2 transition duration-150 hover:bg-gruvbox-yellow-transparent"
-                      style={{ color: '#ebdbb2' }}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
+              <Suspense fallback={<div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />}>
+                <UserDropdown user={user} isOpen={isDropdownOpen} onToggle={setIsDropdownOpen} onLogout={logout} />
+              </Suspense>
             )}
           </div>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <header className="py-16" style={{ backgroundColor: '#32302f', color: '#ebdbb2' }}>
+      {/* Hero Section with lazy loading */}
+      <header className="py-16 lazy-load opacity-0" style={{ backgroundColor: '#32302f', color: '#ebdbb2' }}>
         <div className="container mx-auto px-6 py-12 text-center">
           <h1 className="text-5xl font-bold mb-4 animate-pulse" style={{ color: '#ebdbb2' }}>
             Discover the Best Command-Line Tools
@@ -134,7 +141,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Main Content with lazy loading */}
       <main>
         {/* Add structured data for enhanced search results */}
         <script
@@ -191,8 +198,8 @@ export default function HomePage() {
           }}
         />
 
-        {/* GitHub Organization Invitation Section */}
-        <section className="container mx-auto px-6 py-16" aria-labelledby="github-invitation-heading">
+        {/* GitHub Organization Invitation Section with lazy loading */}
+        <section className="container mx-auto px-6 py-16 lazy-load opacity-0" aria-labelledby="github-invitation-heading">
           <div className="text-center">
             <h2 id="github-invitation-heading" className="text-3xl font-bold mb-10" style={{ color: '#ebdbb2' }}>
               <span style={{ color: '#b8bb26' }}>user@clitools</span>:
@@ -225,7 +232,7 @@ export default function HomePage() {
 
         {/* Call to Action / Discord */}
         <section
-          className="border-t-2 border-b-2 border-dashed py-12"
+          className="border-t-2 border-b-2 border-dashed py-12 lazy-load opacity-0"
           style={{ backgroundColor: '#3c3836', borderColor: '#fe8019' }}
           aria-labelledby="discord-cta-heading"
         >
