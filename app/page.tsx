@@ -3,10 +3,11 @@
 import Image from 'next/image'; // Potentially for future use, not strictly needed for direct SVG embedding
 import Link from 'next/link';   // For Next.js optimised navigation if routes are internal
 import { useAuth0 } from '@auth0/auth0-react'; // Import useAuth0
-import { useEffect } from 'react'; // Import useEffect for logging
+import { useEffect, useState } from 'react'; // Import useEffect for logging and useState for dropdown
 
 export default function HomePage() {
   const { user, isAuthenticated, isLoading, loginWithRedirect, logout, error } = useAuth0(); // Get user state and auth methods
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown
 
   useEffect(() => {
     console.log("Auth0 State:", {
@@ -16,6 +17,22 @@ export default function HomePage() {
       error,
     });
   }, [isLoading, isAuthenticated, user, error]);
+
+  // Add click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const dropdown = document.getElementById('user-dropdown');
+      const trigger = document.getElementById('user-dropdown-trigger');
+      if (dropdown && trigger && !dropdown.contains(event.target as Node) && !trigger.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   if (isLoading) {
     console.log("Auth0 is loading...");
@@ -57,16 +74,30 @@ export default function HomePage() {
               </button>
             )}
             {!isLoading && isAuthenticated && user && (
-              <div className="flex items-center space-x-2">
-                {user.picture && <Image src={user.picture} alt={user.name || 'User avatar'} width={32} height={32} className="rounded-full" />}
-                {user.name && <span style={{color: '#ebdbb2'}} className="whitespace-nowrap">{user.name}</span>}
-                <button 
-                  onClick={() => logout({ logoutParams: { returnTo: typeof window !== 'undefined' ? window.location.origin : undefined } })}
-                  className="transition duration-150 hover:text-gruvbox-green whitespace-nowrap"
-                  style={{ color: '#ebdbb2', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily:'inherit', fontSize: 'inherit' }}
+              <div className="relative">
+                <div 
+                  id="user-dropdown-trigger"
+                  className="flex items-center space-x-2 cursor-pointer" 
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
-                  Logout
-                </button>
+                  {user.picture && <Image src={user.picture} alt={user.name || 'User avatar'} width={32} height={32} className="rounded-full" />}
+                  {user.name && <span style={{color: '#ebdbb2'}} className="whitespace-nowrap">{user.name}</span>}
+                </div>
+                {isDropdownOpen && (
+                  <div 
+                    id="user-dropdown"
+                    className="absolute right-0 mt-2 w-48 rounded-none border-2" 
+                    style={{ backgroundColor: '#3c3836', borderColor: '#fe8019' }}
+                  >
+                    <button 
+                      onClick={() => logout({ logoutParams: { returnTo: typeof window !== 'undefined' ? window.location.origin : undefined } })}
+                      className="w-full text-left px-4 py-2 transition duration-150 hover:bg-gruvbox-yellow-transparent"
+                      style={{ color: '#ebdbb2' }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
