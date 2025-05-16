@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clitools.dev/sitemap.xml
+
+# Disallow admin and auth routes
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /api/
+
+# Crawl-delay
+Crawl-delay: 10 
