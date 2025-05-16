@@ -101,155 +101,33 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Featured Tools Section */}
+      {/* GitHub Organization Invitation Section */}
       <section className="container mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold mb-10 text-center" style={{ color: '#ebdbb2' }}>
-          <span style={{ color: '#fabd2f' }}>&gt;$</span> Featured Tools
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Tool Card 1 */}
-          <div
-            className="border-2 p-6 rounded-none flex flex-col transition-colors duration-300 hover:border-gruvbox-orange"
-            style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-10" style={{ color: '#ebdbb2' }}>
+            <span style={{ color: '#b8bb26' }}>user@clitools</span>:
+            <span style={{ color: '#83a598' }}>~</span>$ Want to join our GitHub organization?
+          </h2>
+          <p className="mt-4 text-lg mb-8" style={{ color: '#928374' }}>
+            // Submit an issue to request joining our organization, let's build the best CLI tools directory together!
+          </p>
+          <a
+            href="https://github.com/clitools-dev/members/issues/new?title=Request%20to%20join%20organization&body=%F0%9F%91%8B%20Hey%20there%21%0A%0A%F0%9F%9A%80%20I%20would%20love%20to%20join%20the%20clitools-dev%20organization%20and%20contribute%20to%20building%20the%20best%20CLI%20tools%20directory%21%0A%0A%23%23%20%F0%9F%93%9D%20About%20me%0A%0A-%20%F0%9F%91%A5%20GitHub%20username%3A%20%0A-%20%F0%9F%92%AC%20Why%20I%20want%20to%20join%3A%20%0A-%20%F0%9F%92%BB%20What%20I%20can%20contribute%3A%20%0A%0A%23%23%20%F0%9F%93%9A%20Additional%20information%0A%0A%3C!--%20Feel%20free%20to%20add%20any%20other%20relevant%20information%20here%20--%3E%0A%0A%F0%9F%8C%9F%20Looking%20forward%20to%20joining%20the%20community%21&labels=join-request"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold px-8 py-3 rounded-none border-2 transition duration-150 inline-flex items-center hover:bg-gruvbox-yellow-darker"
+            style={{ backgroundColor: '#fabd2f', color: '#282828', borderColor: '#fabd2f' }}
           >
             <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              className="w-20 h-20 mx-auto rounded-none border-2"
-              style={{ borderColor: '#665c54' }}
-              fill="none"
+              className="w-5 h-5 mr-2"
+              style={{ fill: '#282828' }}
+              viewBox="0 0 16 16"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width="80" height="80" style={{ fill: '#3c3836' }} />
-              <path d="M20 55 V25 H35" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M32 40 H60" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M50 32 L60 40 L50 48" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
             </svg>
-            <h3 className="text-2xl font-semibold mt-6 mb-2 text-center" style={{ color: '#ebdbb2' }}>
-              Tool Name_v1.0
-            </h3>
-            <p className="mt-2 text-sm flex-grow" style={{ color: '#d5c4a1' }}>
-              &gt; Brief_description_of_the_tool_and_its_main_purpose. Highlighting_key_features.
-            </p>
-            <div className="mt-4 text-center">
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                -linux
-              </span>
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none ml-2"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                -macos
-              </span>
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none ml-2"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                -windows
-              </span>
-            </div>
-            <Link
-              href="#"
-              className="block text-center font-semibold mt-6 px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-aqua-darker"
-              style={{ backgroundColor: '#8ec07c', color: '#282828', borderColor: '#8ec07c' }}
-            >
-              cat tool_details.md
-            </Link>
-          </div>
-
-          {/* Tool Card 2 (Example) */}
-          <div
-            className="border-2 p-6 rounded-none flex flex-col transition-colors duration-300 hover:border-gruvbox-orange"
-            style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-          >
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              className="w-20 h-20 mx-auto rounded-none border-2"
-              style={{ borderColor: '#665c54' }}
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="80" height="80" style={{ fill: '#3c3836' }} />
-              <path d="M20 55 V25 H35" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M32 40 H60" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M50 32 L60 40 L50 48" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-            </svg>
-            <h3 className="text-2xl font-semibold mt-6 mb-2 text-center" style={{ color: '#ebdbb2' }}>
-              Another_Tool.sh
-            </h3>
-            <p className="mt-2 text-sm flex-grow" style={{ color: '#d5c4a1' }}>
-              &gt; This_is_another_excellent_tool_that_helps_you_achieve_tasks_more_efficiently.
-            </p>
-            <div className="mt-4 text-center">
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                -cross-platform
-              </span>
-            </div>
-            <Link
-              href="#"
-              className="block text-center font-semibold mt-6 px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-aqua-darker"
-              style={{ backgroundColor: '#8ec07c', color: '#282828', borderColor: '#8ec07c' }}
-            >
-              man another_tool
-            </Link>
-          </div>
-
-          {/* Tool Card 3 (Example) */}
-          <div
-            className="border-2 p-6 rounded-none flex flex-col transition-colors duration-300 hover:border-gruvbox-orange"
-            style={{ backgroundColor: '#3c3836', borderColor: '#504945' }}
-          >
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              className="w-20 h-20 mx-auto rounded-none border-2"
-              style={{ borderColor: '#665c54' }}
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="80" height="80" style={{ fill: '#3c3836' }} />
-              <path d="M20 55 V25 H35" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M32 40 H60" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-              <path d="M50 32 L60 40 L50 48" style={{ stroke: '#8ec07c' }} strokeWidth="4" />
-            </svg>
-            <h3 className="text-2xl font-semibold mt-6 mb-2 text-center" style={{ color: '#ebdbb2' }}>
-              UtilityPro.exe
-            </h3>
-            <p className="mt-2 text-sm flex-grow" style={{ color: '#d5c4a1' }}>
-              &gt; The_ultimate_utility_for_professionals,_boosting_productivity_and_workflow.
-            </p>
-            <div className="mt-4 text-center">
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                --scriptable
-              </span>
-              <span
-                className="inline-block border text-xs font-medium px-3 py-1 rounded-none ml-2"
-                style={{ backgroundColor: '#504945', color: '#bdae93', borderColor: '#665c54' }}
-              >
-                --open-source
-              </span>
-            </div>
-            <Link
-              href="#"
-              className="block text-center font-semibold mt-6 px-6 py-2 rounded-none border-2 transition duration-150 hover:bg-gruvbox-aqua-darker"
-              style={{ backgroundColor: '#8ec07c', color: '#282828', borderColor: '#8ec07c' }}
-            >
-              ./discover_utility
-            </Link>
-          </div>
+            Request to join organization
+          </a>
         </div>
       </section>
 
