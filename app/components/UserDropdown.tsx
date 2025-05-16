@@ -28,7 +28,11 @@ export default function UserDropdown({ user, isOpen, onToggle, onLogout }: UserD
           style={{ backgroundColor: '#3c3836', borderColor: '#fe8019' }}
         >
           <button 
-            onClick={() => onLogout({ logoutParams: { returnTo: typeof window !== 'undefined' ? window.location.origin : undefined } })}
+            onClick={() => onLogout({ 
+              logoutParams: { 
+                returnTo: typeof window !== 'undefined' ? window.location.origin : 'https://clitools.dev' 
+              } 
+            })}
             className="w-full text-left px-4 py-2 transition duration-150 hover:bg-gruvbox-yellow-transparent"
             style={{ color: '#ebdbb2' }}
           >
