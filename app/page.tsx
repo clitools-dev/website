@@ -205,6 +205,12 @@ export default function HomePage() {
               <span style={{ color: '#b8bb26' }}>user@clitools</span>:
               <span style={{ color: '#83a598' }}>~</span>$ Want to join our GitHub organization?
             </h2>
+            <div className="mt-4 mb-8 p-4 rounded-lg inline-block" style={{ backgroundColor: '#3c3836', border: '2px solid #fe8019' }}>
+              <p className="text-lg" style={{ color: '#fe8019' }}>
+                🚧 <strong>Project Status:</strong> We are currently building our organization and automation infrastructure.
+                This is the perfect time to join and help shape the future of CliTools.Dev!
+              </p>
+            </div>
             <p className="mt-4 text-lg mb-8" style={{ color: '#928374' }}>
               // Submit an issue to request joining our organization, let's build the best CLI tools directory together!
             </p>

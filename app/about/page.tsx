@@ -116,16 +116,57 @@ export default async function AboutUsPage() {
             Welcome to CliTools.Dev! We are passionate about command-line interface (CLI) tools 
             and believe in the power of a well-crafted CLI to boost developer productivity and streamline workflows.
           </p>
+
           <p style={paragraphStyle}>
-            Our mission is to curate and showcase a collection of modern, efficient, and innovative CLI tools 
-            for developers of all backgrounds. Whether you're looking for tools for system administration, 
-            file management, development, networking, or anything in between, we aim to be your go-to resource.
+            Our mission is to create a <strong style={{ color: '#fabd2f' }}>fully automated, community-driven platform</strong> 
+            that showcases the best CLI tools through collective wisdom. We believe in complete transparency and 
+            democratization of tool discovery - no gatekeeping, no manual approvals, just pure community consensus.
+          </p>
+
+          <p style={paragraphStyle}>
+            <strong style={{ color: '#fe8019' }}>🚧 Project Status:</strong> We are currently in the early stages of building 
+            our organization and automation infrastructure. This is the perfect time to join and help shape the future of 
+            CliTools.Dev! Whether you're interested in development, automation, or community building, your contribution 
+            can make a significant impact.
+          </p>
+
+          <p style={paragraphStyle}>
+            Here's what makes us different:
+          </p>
+
+          <ul style={{ ...paragraphStyle, listStyle: 'none', padding: 0 }}>
+            <li style={{ marginBottom: '15px' }}>
+              <span style={{ color: '#b8bb26', fontWeight: 'bold' }}>🤖 Fully Automated:</span>
+              The entire platform runs automatically, from tool submission to display, with no manual intervention needed.
+            </li>
+            <li style={{ marginBottom: '15px' }}>
+              <span style={{ color: '#b8bb26', fontWeight: 'bold' }}>🌐 Open Contribution:</span>
+              Anyone can submit new CLI tools or improvement suggestions without waiting for approval.
+            </li>
+            <li style={{ marginBottom: '15px' }}>
+              <span style={{ color: '#b8bb26', fontWeight: 'bold' }}>🗳️ Community Voting:</span>
+              Through community voting, the most popular and valuable tools naturally rise to the top.
+            </li>
+            <li style={{ marginBottom: '15px' }}>
+              <span style={{ color: '#b8bb26', fontWeight: 'bold' }}>🔍 Transparent Discovery:</span>
+              Discover and promote truly excellent CLI tools through collective wisdom.
+            </li>
+          </ul>
+
+          <p style={paragraphStyle}>
+            Whether you're looking for tools for system administration, 
+            file management, development, networking, or anything in between, 
+            we aim to be your go-to resource, curated by the community, for the community.
           </p>
           
           {/* Team Members Section */}
           <h2 style={{ ...headingStyle, fontSize: '1.8em', color: '#b8bb26', marginTop: '40px', marginBottom: '20px', textAlign: 'left' }}>
             Our Team
           </h2>
+          <p style={paragraphStyle}>
+            We are a group of developers passionate about CLI tools, dedicated to building a fully community-driven platform.
+            Everyone is an equal contributor, shaping the future of this project through code and ideas.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {teamMembers.map((member) => (
               <div
@@ -181,27 +222,28 @@ export default async function AboutUsPage() {
           </div>
           
           <h2 style={{ ...headingStyle, fontSize: '1.8em', color: '#b8bb26', marginTop: '40px', marginBottom: '20px', textAlign: 'left' }}>
-            Our Community
+            Join Our Community
           </h2>
           <p style={paragraphStyle}>
-            We are an open-source initiative and believe in the power of community.
+            We believe in the power of open source and community wisdom. Join us in building the best CLI tools directory!
           </p>
           <p style={paragraphStyle}>
-            Join our development and discussion on GitHub:
+            Participate in development and discussions on GitHub:
             <br />
             <a href={GITHUB_ORG_URL} target="_blank" rel="noopener noreferrer" style={highlightLinkStyle}>
               {GITHUB_ORG_URL}
             </a>
           </p>
           <p style={paragraphStyle}>
-            Connect with us and other CLI enthusiasts on Discord:
+            Connect with other CLI enthusiasts on Discord:
             <br />
             <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" style={highlightLinkStyle}>
               Join our Discord Server
             </a>
           </p>
           <p style={paragraphStyle}>
-            We encourage contributions, suggestions, and feedback. Let's build the ultimate CLI tool directory together!
+            We welcome all forms of contributions: submit new CLI tools, improve existing features, share usage experiences, 
+            or propose new ideas. Let's build a truly community-driven CLI tools ecosystem together!
           </p>
         </div>
       </section>
